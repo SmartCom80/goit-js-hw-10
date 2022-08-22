@@ -1,9 +1,13 @@
 {{#each this}}
-  <h2>{{name.official}}</h2>
+  <h2 style='display: flex;'><img
+      src='{{flags.svg}}'
+      alt='Флаг {{name.oficial}}'
+      width='42'
+      style='align-items: center; margin-right: 20px'
+    />{{name.official}}</h2>
   <p><b>Столица : </b>{{capital}}</p>
   <p><b>Население : </b>{{population}}</p>
-  <div class='img-thumb'>
-    <img src='{{flags.svg}}' alt='Флаг {{name.oficial}}' width='32' />
-  </div>
-  <p><b>Языки : </b>{{#each languages}}{{this}} {{/each}}</p>
+  <p><b>Языки : </b>{{#each languages}}
+      {{this}}
+    {{/each}}</p>
 {{/each}}

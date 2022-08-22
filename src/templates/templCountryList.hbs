@@ -1,7 +1,12 @@
 {{#each this}}
   <li class='country' style='list-style: none;'>
-    <p>
-      <b><img src='{{flags.svg}}' alt='Флаг {{name.oficial}}' width='42' />
+    <p style='display: flex;'>
+      <img
+        src='{{flags.svg}}'
+        alt='Флаг {{name.oficial}}'
+        width='42'
+        style='align-items: center; margin-right: 20px'
+      /><b>
         {{name.official}}</b>
     </p>
   </li>

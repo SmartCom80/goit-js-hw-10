@@ -19,5 +19,6 @@ body {
   margin-bottom: 16px;
 }
 
-/* ul {list-style: none;
-} */
+ul {
+  padding-inline-start: 0;
+}

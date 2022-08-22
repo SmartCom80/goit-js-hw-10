@@ -1,7 +1,7 @@
 import templCountryListMarkup from './templates/templCountryList.hbs';
 import templCountryInfoMarkup from './templates/templCountryInfo.hbs';
 import debounce from 'lodash.debounce';
-import API from '../src/fetchCountries.js';
+import { fetchCountries } from '../src/fetchCountries.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import './css/styles.css';
 
@@ -30,10 +30,9 @@ function onTextFieldInput(event) {
 function checkedTextField(textSearchField) {
   console.log('textSearchField.length :>> ', textSearchField.length);
   if (textSearchField.length > 0) {
-    API.fetchCountries(textSearchField).then(renderMarkup).catch(onFetchError);
+    fetchCountries(textSearchField).then(renderMarkup).catch(onFetchError);
   } else if (textSearchField.length === 0) {
-    refs.countryList.innerHTML = '';
-    refs.countryInfo.innerHTML = '';
+    onClearMarkup();
   }
 }
 
@@ -42,6 +41,7 @@ function renderMarkup(fetchCountry) {
   const sizeArray = fetchCountry.length;
 
   if (sizeArray > 10) {
+    onClearMarkup();
     Notify.info('Too many matches found. Please enter a more specific name.');
   } else if (sizeArray > 1 && sizeArray < 10) {
     refs.countryInfo.innerHTML = '';
@@ -50,6 +50,12 @@ function renderMarkup(fetchCountry) {
     refs.countryList.innerHTML = '';
     refs.countryInfo.innerHTML = templCountryInfoMarkup(fetchCountry);
   }
+}
+
+//Функція обнулення розмітки з попереднього результату
+function onClearMarkup() {
+  refs.countryList.innerHTML = '';
+  refs.countryInfo.innerHTML = '';
 }
 
 //Функція видає попереджуюче сповіщення про помилку запиту
